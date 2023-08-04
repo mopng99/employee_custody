@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- Form View -->
+    <record id="employee_maximum_limit_view_form" model="ir.ui.view">
+        <field name="name">Employee Maximum Limit Form</field>
+        <field name="model">employee.maximum</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <!--                    <div class="oe_title">-->
+                    <!--                        <h1>-->
+                    <!--                            <field name="reference" readonly="1"/>-->
+                    <!--                        </h1>-->
+                    <!--                    </div>-->
+                    <group>
+                        <group>
+                            <field name="employee_id" context="{'special_display_name': True}"/>
+                            <field name="maximum_limit"/>
+                        </group>
+                        <group>
+                            <field name="analytic_account_id"/>
+                        </group>
+                    </group>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" groups="base.group_user"/>
+                    <field name="activity_ids"/>
+                    <field name="message_ids"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <!-- Tree(list) View -->
+    <record id="employee_maximum_limit_view_tree" model="ir.ui.view">
+        <field name="name">Employee Maximum Limit List</field>
+        <field name="model">employee.maximum</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="employee_id" context="{'special_display_name': True}"/>
+                <field name="analytic_account_id"/>
+                <field name="maximum_limit"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- Search View -->
+    <record id="employee_maximum_limit_view_search" model="ir.ui.view">
+        <field name="name">Employee Maximum Limit Search</field>
+        <field name="model">employee.maximum</field>
+        <field name="arch" type="xml">
+            <search>
+
+            </search>
+        </field>
+    </record>
+
+    <record id='employee_maximum_limit_action' model='ir.actions.act_window'>
+        <field name="name">Employee Maximum Limit</field>
+        <field name="res_model">employee.maximum</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem name="Employee configuration"
+              id="employee_maximum_limit"
+              parent="Configuration_base_menu"
+              action="employee_maximum_limit_action"
+              sequence="15"/>
+
+</odoo>

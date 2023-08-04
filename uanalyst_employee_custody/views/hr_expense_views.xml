@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- Form View -->
+        <!--    inheritence_expense  -->
+        <record id="inheritence_expense_view_form" model="ir.ui.view">
+            <field name="name">hr.expense.inherit</field>
+            <field name="model">hr.expense</field>
+            <field name="inherit_id" ref="hr_expense.hr_expense_view_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='employee_id']" position="after">
+                    <field name="custody_id" string="Custody" domain="[('employee_id','=', employee_id)]"
+                           groups="hr_expense.group_hr_expense_team_approver"/>
+                </xpath>
+            </field>
+        </record>
+
+<!--        <record id="inheritence_res_partner_view_form" model="ir.ui.view">-->
+<!--            <field name="name">res.partner.inherit</field>-->
+<!--            <field name="model">res.partner</field>-->
+<!--            <field name="inherit_id" ref="base.view_partner_form"/>-->
+<!--            <field name="arch" type="xml">-->
+<!--                <xpath expr="//field[@name='category_id']" position="replace">-->
+<!--                    <field name="tag_id" string="Tags" widget="many2many_tags"/>-->
+<!--                </xpath>-->
+<!--            </field>-->
+<!--        </record>-->
+
+        <record id="adding_button_to_expenses_form_view" model="ir.ui.view">
+            <field name="name">adding button</field>
+            <field name="model">hr.expense</field>
+            <field name="inherit_id" ref="hr_expense.hr_expense_view_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//form//sheet//div" position="before">
+                    <div class="oe_button_box" name="button_box">
+                        <button class="oe_stat_button" type="object" name="button_receipts"
+                                icon="fa-file-text-o">
+                            <field name="total_receipts" widget="statinfo"/>
+                        </button>
+                    </div>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="hr_expense_view_search_edited" model="ir.ui.view">
+            <field name="name">Expenses Search Inherit</field>
+            <field name="model">hr.expense</field>
+            <field name="inherit_id" ref="hr_expense.hr_expense_view_search"/>
+            <field name="arch" type="xml">
+                <xpath expr="//search" position="inside">
+                    <filter string="Paid" name="my_paid" domain="[('state', '=', 'done')]"/>
+                </xpath>
+            </field>
+        </record>
+
+<!--        <record id="hr_expense_actions_my_all_edited" model="ir.actions.act_window">-->
+<!--            <field named="name">Expenses action edited</field>-->
+<!--            <field name="model">hr.expense</field>-->
+<!--            <field name="view_mode">tree,form</field>-->
+<!--            <field name="inherit_id" ref="hr_expense.hr_expense_actions_my_all"/>-->
+<!--            <field name="arch" type="xml">-->
+<!--                <field name="sms_template_id"-->
+<!--                       context="{'default_model': model_name}"-->
+<!--                       attrs="{'invisible': [('state', '!=', 'sms')],-->
+<!--                            'required': [('state', '=', 'sms')]}"/>-->
+<!--                <field name="context">{'search_default_my_paid': 1}</field>-->
+<!--            </field>-->
+<!--        </record>-->
+    </data>
+</odoo>

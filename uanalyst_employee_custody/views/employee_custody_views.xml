@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Form View -->
+    <record id="employee_custody_view_form" model="ir.ui.view">
+        <field name="name">Employee Custody Form</field>
+        <field name="model">employee.custody</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <button name="action_submit" string="SUBMIT" type="object" states="draft"
+                            class="oe_highlight"/>
+                    <button name="action_first_approved" string="First Approved" type="object" states="submitted"
+                            class="oe_highlight" groups="uanalyst_employee_custody.group_first_approved"/>
+                    <button name="action_second_approved" string="SECOND APPROVED" type="object"
+                            states="first_approved"
+                            class="oe_highlight" groups="uanalyst_employee_custody.group_second_approved"/>
+                    <button name="action_paid" string="PAID"
+                            type="object" states="second_approved"
+                            class="oe_highlight"/>
+                    <field name="state" widget="statusbar"/>
+                </header>
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button class="oe_stat_button" type="object" name="open_hr_expense_tree"
+                                icon="fa-file-text-o">
+                            <field name="total_expenses" widget="statinfo"/>
+                        </button>
+                    </div>
+                    <div class="oe_title">
+                        <h1>
+                            <field name="reference" readonly="1"/>
+                        </h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="employee_id" attrs="{'required': [('state', '=', 'draft')],
+                            'readonly': [('state', '!=', 'draft'), ('state', '!=', 'submitted')]}"/>
+                            <field name="department_id" readonly="1"/>
+                            <field name="job_id" readonly="1"/>
+                            <field name="work_location_id" readonly="1"/>
+                            <field name="date" attrs="{'required': [('state', '=', 'draft')],
+                            'readonly': [('state', '!=', 'draft'), ('state', '!=', 'submitted')]}"/>
+                            <field name="ua_dev_Reason"/>
+                            <field name="balance"/>
+                        </group>
+                        <group>
+                            <field name="analytic_account_id" attrs="{'required': [('state', '=', 'draft')],
+                            'readonly': [('state', '!=', 'draft'), ('state', '!=', 'submitted')]}"/>
+                            <field name="advance"
+                                   attrs="{'readonly': [('state', '!=', 'draft'), ('state', '!=', 'submitted')]}"/>
+                            <field name="currency_id" readonly="1"/>
+                            <field name="company_id" readonly="1"/>
+                            <field name="move_id" attrs="{'invisible': [('state', '!=', 'paid')]}"/>
+                            <!--                            <field name="current_contract" widget="badge" decoration-info="current_contract == 'New'"-->
+                            <!--                                   decoration-warning="current_contract == 'Expired'"-->
+                            <!--                                   decoration-success="current_contract == 'Running'"/>-->
+                        </group>
+                    </group>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" groups="base.group_user"/>
+                    <field name="activity_ids"/>
+                    <field name="message_ids"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <!-- Tree(list) View -->
+    <record id="employee_custody_view_tree" model="ir.ui.view">
+        <field name="name">Employee Custody List</field>
+        <field name="model">employee.custody</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="reference" readonly="1"/>
+                <field name="employee_id"/>
+                <field name="department_id"/>
+                <field name="job_id"/>
+                <field name="work_location_id"/>
+                <field name="currency_id"/>
+                <field name="company_id"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- Search View -->
+    <record id="employee_custody_view_search" model="ir.ui.view">
+        <field name="name">Employee Custody Search</field>
+        <field name="model">employee.custody</field>
+        <field name="arch" type="xml">
+            <search>
+
+            </search>
+        </field>
+    </record>
+
+    <record id='employee_custody_action' model='ir.actions.act_window'>
+        <field name="name">Employee Custody</field>
+        <field name="res_model">employee.custody</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem name="Employee Custody"
+              id="employee_custody_menu"
+              parent="employee_base_menu"
+              action="employee_custody_action"
+              sequence="10"/>
+</odoo>

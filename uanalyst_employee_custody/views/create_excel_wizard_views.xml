@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- Form View -->
+    <record id="create_excel_wizard_view_form" model="ir.ui.view">
+        <field name="name">create excel wizard Form</field>
+        <field name="model">create.excel.wizard</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <field name="employee_ids" widget="many2many_tags" context="{'special_display_name': True}"
+                               domain="[('total_custodies', '!=', 0)]"/>
+                        <field name="date_from"/>
+                        <field name="date_to"/>
+                        <field name="state"/>
+                    </group>
+                    <footer>
+                        <button string="Print Excel Report" name="action_print_excel_report" type="object"
+                                class="btn-primary"/>
+<!--                        <button string="Print XML Report" name="print_report_xml" type="object"-->
+<!--                                class="btn-primary"/>-->
+                        <button string="Cancel" special="cancel" class="btn-secondary"/>
+                    </footer>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+<!--    <record id="create_excel_wizard_action_server" model="ir.actions.server">-->
+<!--        <field name="name">create excel wizard</field>-->
+<!--        <field name="type">ir.actions.server</field>-->
+<!--        <field name="model_id" ref="uanalyst_employee_custody.model_create_excel_wizard"/>-->
+<!--        <field name="binding_model_id" ref="uanalyst_employee_custody.model_create_excel_wizard"/>-->
+<!--        <field name="state">code</field>-->
+<!--        <field name="code">-->
+<!--            action = {-->
+<!--            'type': 'ir.actions.act_window',-->
+<!--            'view_mode': 'form',-->
+<!--            'res_model': 'create.excel.wizard',-->
+<!--            'views': [(env.ref('uanalyst_employee_custody.create_excel_wizard_view_form').id, 'form')],-->
+<!--            'view_type': 'form',-->
+<!--            'target': 'new',-->
+<!--            }-->
+<!--        </field>-->
+<!--    </record>-->
+
+        <record id='create_excel_wizard_action' model='ir.actions.act_window'>
+            <field name="name">create excel wizard</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">create.excel.wizard</field>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="create_excel_wizard_view_form"/>
+            <field name="target">new</field>
+        </record>
+
+    <menuitem name="Payment Excel Report"
+              id="create_excel_wizard_menu"
+              parent="employee_base_menu"
+              action="create_excel_wizard_action"
+              sequence="20"/>
+
+</odoo>

@@ -1,0 +1,5 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_uanalyst_employee_custody,access.uanalyst_employee_custody,model_employee_custody,group_employee_access,1,1,1,1
+access_uanalyst_configuration_custody,access.uanalyst_configuration_custody,model_configuration_custody,group_employee_access,1,1,1,1
+access_uanalyst_employee_maximum,access.uanalyst_employee_maximum,model_employee_maximum,group_employee_access,1,1,1,1
+access_uanalyst_create_excel_wizard,access.uanalyst_create_excel_wizard,model_create_excel_wizard,group_employee_access,1,1,1,1

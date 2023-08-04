@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="group_employee_access" model="res.groups">
+        <field name="name">Employee Access</field>
+        <field name="users" eval="[(4, ref('base.user_admin'))]"/>
+    </record>
+
+    <record id="group_employee" model="ir.module.category">
+        <field name="name">Employee Custody</field>
+        <field name="description">Category For Employee</field>
+    </record>
+    <record id="group_first_approved" model="res.groups">
+        <field name="name">First Approved</field>
+        <field name="category_id" ref="uanalyst_employee_custody.group_employee"/>
+    </record>
+    <record id="group_second_approved" model="res.groups">
+        <field name="name">Second Approved</field>
+        <field name="category_id" ref="uanalyst_employee_custody.group_employee"/>
+    </record>
+
+</odoo>
+

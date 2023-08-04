@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <menuitem name="Employee Custody"
+              id="employee_base_menu"
+              parent="hr_expense.menu_hr_expense_root"
+              sequence="50"/>
+
+        <menuitem name="Configuration"
+                  id="Configuration_base_menu"
+                  parent="employee_base_menu"
+                  sequence="20"/>
+
+</odoo>
